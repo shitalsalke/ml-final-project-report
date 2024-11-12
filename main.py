@@ -355,6 +355,7 @@ st.write("""
 | **Shital**          | Created Streamlit app for the midterm project report.                                                                                       |
 |                     | Created github-repo for project midterm report.                                                                                             |
 |                     | Gantt chart update.                                                                                                                         |
+|                     | Updated main project GitHub repository.                                                                                                     |
 |                     | Updated midterm project report.                                                                                                             |
 """)
 
