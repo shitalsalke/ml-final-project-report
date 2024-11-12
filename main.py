@@ -38,7 +38,7 @@ st.write("""
 """)
 
 # Methods Section
-st.header("Methods")
+st.header("4. Methods")
 st.subheader("Data Preprocessing Methods")
 st.write("""
 To prepare MRI images for effective model training, preprocessing is crucial to ensure clean, relevant, and balanced data. The following techniques were used:
@@ -332,7 +332,7 @@ st.header('7. Gantt Chart')
 st.image('./gantt.png')
 
 # Contribution Table Section
-st.header('7. Contribution Table')
+st.header('8. Contribution Table')
 import streamlit as st
 
 st.subheader("Team Contributions")
@@ -359,7 +359,7 @@ st.write("""
 
 
 # References Section
-st.header('8. References')
+st.header('9. References')
 st.write("""
 [1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/)(accessed Oct. 4, 2024).\n
 [2] M. Z. Khaliki and M. S. Başarslan, “Brain tumor detection from images and comparison with transfer learning methods and 3-layer CNN,” *Nature News*, [https://www.nature.com/articles/s41598-024-52823-9](https://www.nature.com/articles/s41598-024-52823-9)  (accessed Oct. 4, 2024).\n
