@@ -340,7 +340,7 @@ st.subheader("Team Contributions")
 st.write("""
 | **Team Member**     | **Midterm Project Contributions**                                                                                                           |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Koushika**        | ResNet50 supervised learning algorithm - implementation until PCA dimensionality reduction done, model fitting on-progress.                |
+| **Koushika**        | ResNet50 supervised learning algorithm - implementation until PCA dimensionality reduction done, model fitting in-progress.                |
 |                     | EDA done for ResNet50.                                                                                                                      |
 |                     | Updated Github repository.                                                                                                                  |
 |                     | Updated Midterm Project Report.                                                                                                             |
@@ -352,7 +352,8 @@ st.write("""
 |                     | Worked on computing/comparing the accuracy score, F1 score, AUC-ROC, Confusion Matrix, and cross-validation for unsupervised and supervised learning algorithms. |
 |                     | Updated GitHub repository.                                                                                                                  |
 |                     | Updated midterm project report.                                                                                                             |
-| **Shital**          | Created Streamlit app for the midterm project report.                                                                                               |
+| **Shital**          | Created Streamlit app for the midterm project report.                                                                                       |
+|                     | Created github-repo for project midterm report.                                                                                             |
 |                     | Gantt chart update.                                                                                                                         |
 |                     | Updated midterm project report.                                                                                                             |
 """)
