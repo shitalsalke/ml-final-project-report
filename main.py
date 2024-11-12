@@ -157,25 +157,25 @@ We implemented the CNN model as a part of supervised learning of brain tumor det
 **CNN Model Architecture**:
 It consists of five convolution blocks followed by dense layers for classification. That hierarchy within the layers has meaning in the abstraction of features from MRI images.
 
-- **1. Convolutional Layers**: 
+1. **Convolutional Layers**: 
     That is, a model with a 32-filter 'Conv2D' that increases gradually up to 512 in successive layers will enable the network to learn from low-level, fine-grained details to high-level, complex features.
     The kernel size for all the convolutional layers is chosen to be 3x3, as this has become a kind of standard because it is a great tradeoff between capturing local features and reducing computational complexity. For all the layers, activation is ReLU that introduces non-linearity into the network and, hence, makes the network capable of learning complex patterns required for distinguishing between types of tumors.
     Batch normalization after every convolutional layer normalizes the output. In such a way, it has been able to stabilize and speed up the learning process since it reduces the problem of internal covariate shift that leads to improvements in convergence. Normalization shall have high utility in deeper networks; this model is less sensitive to initializations and learning rates.
     After each convolution block, a max-pooling layer is applied; this reduces the volume by half in the spatial dimension. Max-pooling reduces the dimensions of feature maps, and by doing so it retains the most important features since the process reduces computation in the pooling features and enforces spatial invariance.
     This will enable the model to hierarchically activate features from lower and lower levels of abstraction, a very desirable trait for complicated image data acquired by MRI scans.
-- **2. Dropout Layers**: To handle overfitting, dropout is added after each max-pooling layer. The dropout rate shall be 0.25-that is, at every iteration the model sets 25% of units to zero. In this way, the model will learn more robust features and improve its generalization capability.
+2. **Dropout Layers**: To handle overfitting, dropout is added after each max-pooling layer. The dropout rate shall be 0.25-that is, at every iteration the model sets 25% of units to zero. In this way, the model will learn more robust features and improve its generalization capability.
     Dropout is increased to 0.5 in fully connected layers, where there is more risk of overfitting because of more parameters.   
-- **3. Fully Connected Dense Layers**
+3. **Fully Connected Dense Layers**
     Next are three thick, fully connected layers with sizes 1024, 512, and 256 with batch normalization and dropout. These dense layers combine features learned through convolutional layers in making final classification decisions. Added Dense Layers with ReLU activation to enhance model capacity to learn multi-dimensional complex relations and patterns in data.
-- **4. Output Layer**
+4. **Output Layer**
     The last layer is a ‘Dense’ layer, softmax activation gives the probabilities of each type of tumor. Softmax gives a probability to each class so that model has some form of output in probabilities over all classes. Quite good structure for multi-class classification since it has a high value of class in probability to be chosen as a predicted class for the model.
-- **5. Compilation**
+5. **Compilation**
     It only makes the model compile using the Adam optimizer. In this variant of the Adam optimization algorithm, learning rates are adapted for each parameter individually in a way depending on the magnitude of gradient for that parameter in a mini-batch. This generally leads to a higher convergence speed and performance.
     Loss function: The loss function used in this model is categorical cross-entropy for multi-class problems. This defines how the predicted labels deviate from the true ones, giving larger penalties on larger errors. This gives a higher chance of better prediction using a model. Metric: Accuracy simply refers to the measure that tells something about how frequently a model predicts an output correctly.
-- **6. Training Process**
+6. **Training Process**
     It uses the batch size 32 to train the model using the training dataset for over 30 epochs. It shall use validation data for testing, with a view to offering real-time monitoring of the model's performance on unseen data.
     It iteratively updates its weights and biases motivated by minimizing the loss function so that models progressively improve the classification accuracy.
-- **7. Evaluation**
+7. **Evaluation**
     The model is then matched against a test dataset containing performances that yield an accuracy score in determining how the model will perform in classifying examples. Indeed, this is the ultimate success measure, the test accuracy score, to classify brain tumor types from MRI images using this model.The model is therefore tailored on insight generalization into a wide array of tumor types with very sparse labeled data and hence will be suitable for application in medical diagnosis where utmost measures against accuracy and robustness are paramount.
 """)
 
@@ -209,12 +209,12 @@ Our chosen algorithms are expected to yield strong performance in multi-class sc
 st.markdown("### KMeans")
 st.image('./kmeans.png')
 st.write("""
-- **1. F1 Score: 0.4903**
+1. **F1 Score: 0.4903**
   - **Interpretation**: The F1 score is the harmonic mean of precision and recall, which is a good measure for imbalanced datasets. It ranges from 0 to 1, where 1 is a perfect score and 0 indicates poor performance.
   - In your case, an F1 score of 0.4903 means that, while your clustering model isn't performing excellently, it is better than random guessing. It indicates moderate precision and recall across the clusters.
 """)
 
-st.write("""- **2. Confusion Matrix**""")
+st.write("""2. **Confusion Matrix**""")
 st.markdown(
     """
     <div style="color: green; font-family: monospace;">
@@ -234,18 +234,18 @@ st.write("""
 """)
 
 st.write("""
-- **3. AUC-ROC Score: 0.3032**
+3. **AUC-ROC Score: 0.3032**
   - **Interpretation**: The AUC-ROC (Area Under the Receiver Operating Characteristic Curve) score measures the performance of a classification model. It is typically used for binary classification, but here it is being used for a multi-class case with the "One-vs-Rest" (OvR) approach.
   - A **low AUC-ROC score of 0.3032** indicates that the clustering model struggles to distinguish between the categories. An AUC score closer to 1 means the model has better performance at differentiating between classes. Since your score is much lower, it suggests that your clustering algorithm isn't reliably separating the classes.
 """)
 
 st.write("""
-- **4. Cross-Validation Scores:**
+4. **Cross-Validation Scores:**
 [0.92170819 0.01708185 0.03487544 0.24287749 0.21866097]
   - **Interpretation**: These scores represent the accuracy of the model on 5 different cross-validation folds (using 5-fold cross-validation). Each number corresponds to the accuracy for one fold.
   - You can see that the cross-validation scores are quite variable, with one score as high as **92.17%** and others as low as **1.7%**. This suggests that the model is overfitting on some data and performing poorly on others. Such a large discrepancy indicates that the model may not generalize well across all subsets of the data.
 
-- **5. Mean Cross-Validation Accuracy: 0.2870**
+5. **Mean Cross-Validation Accuracy: 0.2870**
   - **Interpretation**: The mean cross-validation score of **0.2870** indicates that, on average, the model's accuracy is quite low across the different folds. This further confirms that the clustering model may not be robust, and its performance isn't stable across different subsets of data.
 
 Summary of what these results mean:
@@ -263,24 +263,24 @@ High accuracy was given by the model, which identified the right classes, indica
 """)
 
 # F1 Score Section
-st.write("- **1. F1 Score (Weighted): 0.94**")
 st.write("""
+1. **F1 Score (Weighted): 0.94**
   - **Interpretation**: The weighted F1 score combines precision and recall across classes, giving more weight to high-instance classes. An F1 score of 0.94 indicates that the model has high precision and recall across categories, handling class imbalances effectively and maintaining consistency in predictions across various classes.
 """)
 
 # Confusion Matrix Section
-st.write("- **2. Confusion Matrix**")
+st.write("2. **Confusion Matrix**")
 st.image('./cf2.png', caption="Confusion Matrix for CNN Model")
 
 # AUC-ROC Score Section
-st.write("- **3. AUC-ROC Score: 0.99**")
 st.write("""
+3. **AUC-ROC Score: 0.99**
   - **Interpretation**: A high AUC-ROC score of 0.99 indicates the model's excellent ability to differentiate between classes. This score suggests nearly perfect separation between categories in a multi-class environment, confirming that the model is highly reliable and discriminative.
 """)
 
 # Classification Report Section
-st.write("- **4. Classification Report**")
 st.write("""
+4. **Classification Report**
   - The classification report provides precision, recall, and F1-score for each class:
   
     | Class | Precision | Recall | F1-Score | Support |
@@ -296,8 +296,8 @@ st.write("""
 """)
 
 # Cross-Validation Metrics Section
-st.write("- **5. Cross-Validation Metrics**")
 st.write("""
+5. **Cross-Validation Metrics**
   - **Accuracy**: 0.9681
   - **F1 Score**: 0.9681
   - **ROC AUC Score**: 0.9892
@@ -306,8 +306,8 @@ st.write("""
 """)
 
 # Summary Section
-st.write("- **Summary of Results**")
 st.write("""
+- **Summary of Results**
   - The weighted F1 score of 0.94 shows that the model maintains high precision and recall across all classes, handling class imbalances well.
   - The AUC-ROC score of 0.99 demonstrates strong class separability and high discrimination between categories.
   - The classification report shows high precision, recall, and F1 scores for each class, with an overall accuracy of 94%.
