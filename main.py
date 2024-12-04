@@ -2,12 +2,15 @@ import streamlit as st
 
 # Title and Team Information
 st.title('CS7641: Project Midterm Report')
+
 st.subheader('(Group 42)')
+
 st.header('Tumor Detection and Classification')
 st.markdown('**Team Members:** Shital Salke, Jenny Lin, Koushika Kesavan, Hima Varshini Parasa')
 st.markdown('**Institution:** Georgia Institute of Technology')
 
 # Introduction and Background Section
+
 st.header('1. Introduction and Background')
 st.write("""
 Brain tumors are abnormal cell growths in or around the brain, classified as benign (non-cancerous) or malignant (cancerous). In adults, the primary types include Gliomas (usually malignant), Meningiomas (often benign), and Pituitary tumors (generally benign). Early diagnosis is crucial for improving outcomes and treatment options. This project aims to develop a machine learning model for detecting and classifying brain tumors using MRI images.
@@ -19,6 +22,7 @@ The dataset for this project, “Brain Tumor (MRI scans),” sourced from Kaggle
 st.markdown('Link to the Dataset: [https://www.kaggle.com/datasets/rm1000/brain-tumor-mri-scans/data](https://www.kaggle.com/datasets/rm1000/brain-tumor-mri-scans/data)')
 
 # Problem Definition Section
+
 st.header('2. Problem Definition')
 st.write("""
 Manual analysis of MRI scans by radiologists is labor-intensive and error-prone. This project aims to automate the detection and classification of brain tumors (Gliomas, Meningiomas, and Pituitary tumors) to improve accuracy and efficiency compared to existing models.
@@ -29,6 +33,7 @@ The solution involves developing a deep learning model using a custom CNN with m
 """)
 
 # Goals section
+
 st.header('3. Project Goals')
 st.write("""
 - Detects and classifies brain tumors through MRI scans.
@@ -38,13 +43,16 @@ st.write("""
 """)
 
 # Methods Section
+
 st.header("4. Methods")
+
 st.subheader("Data Preprocessing Methods")
 st.write("""
 To prepare MRI images for effective model training, preprocessing is crucial to ensure clean, relevant, and balanced data. The following techniques were used:
 """)
 
 # Data Cleaning
+
 st.markdown("### Data Cleaning")
 st.write("""
 **Method**: `check_image_integrity`
@@ -53,6 +61,7 @@ st.write("""
 """)
 
 # Image Normalization
+
 st.markdown("### Image Normalization")
 st.write("""
 **Method**: `normalize_images`
@@ -61,6 +70,7 @@ st.write("""
 """)
 
 # Dimensionality Reduction
+
 st.markdown("### Dimensionality Reduction")
 st.write("""
 **Method**: Principal Component Analysis (PCA)
@@ -69,6 +79,7 @@ st.write("""
 """)
 
 # Data Augmentation
+
 st.markdown("### Data Augmentation (Suggested for future integration)")
 st.write("""
 **Method**: ImageDataGenerator (or similar augmentation techniques)
@@ -77,6 +88,7 @@ st.write("""
 """)
 
 # Train-Test Split
+
 st.markdown("### Train-Test Split")
 st.write("""
 **Method**: `train_test_split`
@@ -85,10 +97,13 @@ st.write("""
 """)
 
 # Machine Learning Algorithms
+
 st.subheader("Machine Learning Algorithms")
 
 # Unsupervised Learning
+
 st.markdown("### Unsupervised Learning")
+
 st.markdown("#### KMeans")
 st.write("""
 We have completed KMeans for this dataset. Using KMeans clustering for brain tumor detection in this context is a bit unconventional since KMeans is typically an unsupervised learning algorithm, often used for clustering rather than classification. However, there are some goals where KMeans might contribute to the project, primarily in preprocessing, feature extraction, or exploratory analysis:
@@ -101,6 +116,7 @@ We have completed KMeans for this dataset. Using KMeans clustering for brain tum
 In our implementation, we applied Principal Component Analysis (PCA) to reduce the dataset’s dimensionality to two components, PC1 and PC2. These principal components capture the directions of maximum variance in the data, with PC1 representing the largest variance and PC2 representing the second-largest variance. This reduction allows us to visualize the high-dimensional data in a lower-dimensional space, making it easier to interpret the clusters formed by KMeans.
 Initially, KMeans assigned arbitrary labels (0-3) to the clusters, which were not useful for further analysis. To address this, we applied a post-processing step where we examined each cluster and counted the frequency of the four tumor categories. The most frequent category within each cluster was used as the final label, providing more meaningful classification results.                  
 """)
+
 
 st.markdown("#### GMM")
 st.write("""
@@ -118,7 +134,9 @@ Initially, GMM assigned soft cluster probabilities across all tumor categories, 
 
 
 # Supervised Learning
+
 st.markdown("### Supervised Learning")
+
 
 st.markdown("#### ResNet50")
 st.write("""
@@ -145,6 +163,7 @@ A pre-trained ResNet50 model is set up as a feature extractor adding custom laye
 """)
 
 # CNN Model
+
 st.markdown("#### CNN")
 st.write("""
 We implemented the CNN model as a part of supervised learning of brain tumor detection that will classify MRI images into predefined categories. 
@@ -179,7 +198,9 @@ It consists of five convolution blocks followed by dense layers for classificati
 
 
 # Results and Discussion Section
+
 st.header('5. Results and Discussion')
+
 st.subheader('ML Metrics')
 st.write("""
 We will evaluate our results using the following metrics [7]:
@@ -190,6 +211,7 @@ We will evaluate our results using the following metrics [7]:
 
 Our chosen algorithms are expected to yield strong performance in multi-class scenarios, improving the F1 Score and AUC-ROC metrics. Cross-validation will help assess model consistency across different datasets using the EfficientNetB2 algorithm.
 """)
+
 st.markdown("### KMeans")
 st.image('./kmeans.png')
 st.write("""
@@ -239,6 +261,7 @@ Summary of what these results mean:
 - **The cross-validation scores** are highly variable, which points to the model not being stable or reliable when tested on different data subsets.
 - **The mean cross-validation accuracy** further supports that the model's generalization is weak, with the accuracy being quite low on average.
 """)
+
 
 
 
@@ -298,6 +321,7 @@ Summary of what these results mean:
 - **The mean cross-validation accuracy** confirms weak generalization and the need for optimization.
 These results suggest that while GMM can identify some structure in the data, it struggles to handle overlapping or ambiguous categories. Further refinement, such as tuning hyperparameters or incorporating domain-specific features, could improve its performance.
 """)
+
 
 
 
@@ -378,6 +402,7 @@ st.write("""
 
 
 # Goals/Expected results section
+
 st.header('6. Goals/Expected Results')
 st.write("""
 - F1 Score: 97-99%.
@@ -388,12 +413,15 @@ st.write("""
 
 
 # Gantt Chart Section
+
 st.header('7. Gantt Chart')
 st.image('./gantt.png')
 
 # Contribution Table Section
+
 st.header('8. Contribution Table')
 import streamlit as st
+
 
 st.subheader("Team Contributions")
 
@@ -421,6 +449,7 @@ st.write("""
 
 
 # References Section
+
 st.header('9. References')
 st.write("""
 [1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/)(accessed Oct. 4, 2024).\n
