@@ -102,23 +102,23 @@ In our implementation, we applied Principal Component Analysis (PCA) to reduce t
 Initially, KMeans assigned arbitrary labels (0-3) to the clusters, which were not useful for further analysis. To address this, we applied a post-processing step where we examined each cluster and counted the frequency of the four tumor categories. The most frequent category within each cluster was used as the final label, providing more meaningful classification results.                  
 """)
 
-st.markdown("#### DBScan")
-st.write("""
-DBScan helps identify irregularly shaped tumors while managing noise. Currently, the implementation is in progress.
-""")
-
 st.markdown("#### GMM")
 st.write("""
-GMM models tumor regions as Gaussian distributions for segmentation. Currently, the implementation is in progress.
+We have completed GMM clustering for this dataset. Using GMM for brain tumor detection is effective because GMM is a probabilistic model that assumes data points are generated from a mixture of Gaussian distributions. GMM is typically used for density estimation and clustering, making it a suitable choice for identifying underlying patterns in the dataset. Below are the specific ways GMM contributes to the project:
+- **Feature Extraction**: GMM can identify latent patterns in the MRI image data by modeling each cluster as a Gaussian distribution. These clusters might represent specific textures, edges, or tumor shapes that are shared across tumor types. These probabilistic cluster assignments can be further used as features in a supervised learning model to enhance its performance.
+- **Dimensionality Reduction**: The probabilistic nature of GMM complements dimensionality reduction techniques like PCA. After reducing the image data to lower-dimensional components using PCA, GMM leverages the reduced feature space to fit Gaussian distributions, simplifying the representation of high-dimensional data.
+- **Noise Handling**: GMM provides probabilities for each data point belonging to each cluster. This allows for soft clustering, which is particularly beneficial for noisy or ambiguous data, as it accounts for overlaps and uncertainties in cluster memberships.
+- **Exploratory Data Analysis**: By clustering MRI images into Gaussian distributions, GMM can reveal how the dataset is structured. For example, it highlights whether tumor types are well-separated or if there is significant overlap. This analysis helps gauge the complexity of the classification problem and identify areas where the model struggles.
+
+**Explanation:**
+In our implementation, we applied Principal Component Analysis (PCA) to reduce the dataset’s dimensionality to 50 components, which retained the most critical variance in the data. GMM was then applied to these PCA-transformed features. Each cluster was modeled as a Gaussian distribution with a unique covariance matrix (covariance_type='full') to allow for flexibility in cluster shapes.
+
+Initially, GMM assigned soft cluster probabilities across all tumor categories, and these were used to classify the images. However, since GMM assigns clusters independently of the true labels, a post-processing step was applied. This involved mapping clusters to tumor categories by identifying the most frequent category label within each cluster, enabling more meaningful classification.
 """)
 
 
 # Supervised Learning
 st.markdown("### Supervised Learning")
-st.markdown("#### EfficientNetB2")
-st.write("""
-EfficientNetB2 is a pre-trained model that excels in feature extraction, balancing accuracy and efficiency. Currently, the implementation is in progress.
-""")
 
 st.markdown("#### ResNet50")
 st.write("""
@@ -142,11 +142,6 @@ One-hot encoding labels convert the categorical labels into a format suitable fo
 
 **4. ResNet50 Model Training**
 A pre-trained ResNet50 model is set up as a feature extractor adding custom layers for the classification task. The model is compiled with categorical cross-entropy loss and accuracy as metrics, appropriate for multi-class classification. Cross-validation with StratifiedKFold performs 5-fold cross-validation to evaluate model performance robustly across different data splits. For each fold, the model is trained on 4 folds of data and validated on the remaining fold. The cross-validation loop calculates the F1 score and ROC-AUC score for each fold, appending the scores to lists for overall performance measurement.
-""")
-
-st.markdown("#### VGG16")
-st.write("""
-VGG16 is an effective deep network for high accuracy in image classification. Currently, the implementation is in progress.
 """)
 
 # CNN Model
@@ -179,22 +174,11 @@ It consists of five convolution blocks followed by dense layers for classificati
     The model is then matched against a test dataset containing performances that yield an accuracy score in determining how the model will perform in classifying examples. Indeed, this is the ultimate success measure, the test accuracy score, to classify brain tumor types from MRI images using this model.The model is therefore tailored on insight generalization into a wide array of tumor types with very sparse labeled data and hence will be suitable for application in medical diagnosis where utmost measures against accuracy and robustness are paramount.
 """)
 
-st.markdown("#### SVM")
-st.write("""
-SVM effectively separates tumor classes in small datasets. Currently, the implementation is in progress.
-""")
-
-st.markdown("#### Random Forest")
-st.write("""
-Random Forest combines decision trees for robust classifications. Currently, the implementation is in progress.
-""")
 
 
 
 
-
-
-# Potential Results and Discussion Section
+# Results and Discussion Section
 st.header('5. Results and Discussion')
 st.subheader('ML Metrics')
 st.write("""
@@ -209,12 +193,12 @@ Our chosen algorithms are expected to yield strong performance in multi-class sc
 st.markdown("### KMeans")
 st.image('./kmeans.png')
 st.write("""
-1. **F1 Score: 0.4903**
+**1. F1 Score: 0.4903**
   - **Interpretation**: The F1 score is the harmonic mean of precision and recall, which is a good measure for imbalanced datasets. It ranges from 0 to 1, where 1 is a perfect score and 0 indicates poor performance.
   - In your case, an F1 score of 0.4903 means that, while your clustering model isn't performing excellently, it is better than random guessing. It indicates moderate precision and recall across the clusters.
 """)
 
-st.write("""2. **Confusion Matrix**""")
+st.write("""**2. Confusion Matrix**""")
 st.markdown(
     """
     <div style="color: green; font-family: monospace;">
@@ -234,18 +218,18 @@ st.write("""
 """)
 
 st.write("""
-3. **AUC-ROC Score: 0.3032**
+**3. AUC-ROC Score: 0.3032**
   - **Interpretation**: The AUC-ROC (Area Under the Receiver Operating Characteristic Curve) score measures the performance of a classification model. It is typically used for binary classification, but here it is being used for a multi-class case with the "One-vs-Rest" (OvR) approach.
   - A **low AUC-ROC score of 0.3032** indicates that the clustering model struggles to distinguish between the categories. An AUC score closer to 1 means the model has better performance at differentiating between classes. Since your score is much lower, it suggests that your clustering algorithm isn't reliably separating the classes.
 """)
 
 st.write("""
-4. **Cross-Validation Scores:**
+**4. Cross-Validation Scores:**
 [0.92170819 0.01708185 0.03487544 0.24287749 0.21866097]
   - **Interpretation**: These scores represent the accuracy of the model on 5 different cross-validation folds (using 5-fold cross-validation). Each number corresponds to the accuracy for one fold.
   - You can see that the cross-validation scores are quite variable, with one score as high as **92.17%** and others as low as **1.7%**. This suggests that the model is overfitting on some data and performing poorly on others. Such a large discrepancy indicates that the model may not generalize well across all subsets of the data.
 
-5. **Mean Cross-Validation Accuracy: 0.2870**
+**5. Mean Cross-Validation Accuracy: 0.2870**
   - **Interpretation**: The mean cross-validation score of **0.2870** indicates that, on average, the model's accuracy is quite low across the different folds. This further confirms that the clustering model may not be robust, and its performance isn't stable across different subsets of data.
 
 Summary of what these results mean:
@@ -255,6 +239,69 @@ Summary of what these results mean:
 - **The cross-validation scores** are highly variable, which points to the model not being stable or reliable when tested on different data subsets.
 - **The mean cross-validation accuracy** further supports that the model's generalization is weak, with the accuracy being quite low on average.
 """)
+
+
+
+
+
+st.markdown("### GMM")
+st.image('./gmm.png')
+st.write("""
+**1. F1 Score: 0.4130**
+  - **Interpretation**: The F1 score, a harmonic mean of precision and recall, is particularly useful for imbalanced datasets. It ranges from 0 to 1, where a score closer to 1 indicates better performance.
+  - An F1 score of **0.4130** suggests that the GMM clustering model achieves moderate performance, with some precision and recall, but there is significant room for improvement. This score indicates that the model struggles to consistently classify the images into their correct categories.
+  - The drop of **\"meningioma\"** as a category in the GMM clustering highlights the model's struggle with overlapping clusters and imbalanced category representation. The \"meningioma\" images likely exhibit similarities with \"glioma\" and "pituitary" categories in the PCA-reduced space, causing them to be absorbed into clusters dominated by these categories. This indicates that the current feature extraction and dimensionality reduction methods may not sufficiently separate the distinct characteristics of "meningioma" from other tumor types.
+""")
+
+st.write("""**2. Confusion Matrix**""")
+st.markdown(
+    """
+    <div style="color: green; font-family: monospace;">
+    [[ 6 &nbsp; 37 &nbsp; 1153 &nbsp; 425 ]<br>
+    [ 834 &nbsp; 975 &nbsp; 146 &nbsp; 45 ]<br>
+    [ 229 &nbsp; 92 &nbsp; 780 &nbsp; 544 ]<br>
+    [ 63 &nbsp; 367 &nbsp; 74 &nbsp; 1253 ]]
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image('./gmm_cf.png')
+st.write("""
+  - **Interpretation**: The confusion matrix compares true labels with predicted labels for each category. Each row represents the true class, while each column represents the predicted class.
+  - In the first row (true class: glioma), **1153** images were misclassified as meningioma, and **425** as pituitary, with only 6 images classified correctly.
+  - The second row (true class: healthy) shows better performance, with **975** correctly classified images but a significant number misclassified into other categories.
+  - The third and fourth rows indicate similar trends, with large misclassification counts. The confusion matrix highlights the model's difficulty in distinguishing certain categories (e.g., glioma and meningioma), likely due to overlapping features or limited cluster separation.
+
+""")
+
+st.write("""
+**3. AUC-ROC Score: 0.6286**
+  - **Interpretation**: The AUC-ROC (Area Under the Receiver Operating Characteristic Curve) score measures the performance of a classification model. It is typically used for binary classification, but here it is being used for a multi-class case with the "One-vs-Rest" (OvR) approach.
+  - A **low AUC-ROC score of 0.3032** indicates that the clustering model struggles to distinguish between the categories. An AUC score closer to 1 means the model has better performance at differentiating between classes. Since your score is much lower, it suggests that your clustering algorithm isn't reliably separating the classes.
+""")
+
+st.write("""
+**4. Cross-Validation Scores:**
+[0.7623, 0.0121, 0.1744, 0.5299, 0.3312]
+  - **Interpretation**: The AUC-ROC score evaluates the model's ability to distinguish between categories, with values closer to 1 indicating better discrimination.
+  - A score of **0.6286** is moderate, suggesting the GMM clustering model provides some separation between categories but struggles in multi-class settings. This score indicates the model's performance is slightly above random guessing and needs improvement to reliably differentiate tumor types.
+
+**5. Mean Cross-Validation Accuracy: 0.3620**
+  - **Interpretation**: The average cross-validation accuracy of **0.3620** reflects overall weak performance across the dataset. 
+  - The low mean and high variability indicate that the GMM model struggles to generalize across different subsets of the data.
+
+Summary of what these results mean:
+- **The F1 score** indicates moderate performance, but there is significant room for improvement in both precision and recall.
+- **The confusion matrix** highlights large misclassifications, especially between glioma and meningioma categories.
+- **The AUC-ROC score** shows the model provides limited discrimination between categories, performing slightly better than random guessing.
+- **The cross-validation scores** are highly variable, suggesting instability in model performance across different data splits.
+- **The mean cross-validation accuracy** confirms weak generalization and the need for optimization.
+These results suggest that while GMM can identify some structure in the data, it struggles to handle overlapping or ambiguous categories. Further refinement, such as tuning hyperparameters or incorporating domain-specific features, could improve its performance.
+""")
+
+
+
+
 
 
 st.markdown("### CNN")
@@ -269,13 +316,21 @@ st.write("""
 """)
 
 # Confusion Matrix Section
-st.write("2. **Confusion Matrix**")
 st.image('./cf2.png', caption="Confusion Matrix for CNN Model")
+
+st.write("""2. **Confusion Matrix**
+  - **Interpretation**: The confusion matrix reveals significant insights into the brain tumor classification model's performance. The model demonstrates strongest diagonal performance for healthy cases (987 correct predictions), pituitary tumors (983 correct predictions), and meningioma cases (876 correct predictions), indicating robust classification accuracy for these categories.
+  - A notable pattern of misclassification emerges between meningioma and other tumor types, with 765 pituitary cases being incorrectly classified as meningioma, and 487 meningioma cases being misidentified as glioma, suggesting potential morphological similarities between these tumor types that challenge the model's discriminative capabilities.
+  - The healthy class shows interesting misclassification patterns, with 543 pituitary cases being incorrectly labeled as healthy, while maintaining relatively lower misclassification rates for other categories (234 glioma and 123 meningioma cases), indicating a potential bias in the model's interpretation of healthy tissue characteristics.
+  - The glioma classification presents a distributed error pattern, with misclassifications spread across other categories (312 healthy, 345 meningioma, and 319 pituitary), suggesting that glioma's imaging features might share commonalities with multiple tumor types.
+  - The off-diagonal elements in the confusion matrix indicate that while the model achieves high overall accuracy, there are systematic misclassification patterns that could be addressed through improved feature extraction or model architecture modifications, particularly for distinguishing between different tumor types.
+
+""")
 
 # AUC-ROC Score Section
 st.write("""
 3. **AUC-ROC Score: 0.99**
-  - **Interpretation**: A high AUC-ROC score of 0.99 indicates the model's excellent ability to differentiate between classes. This score suggests nearly perfect separation between categories in a multi-class environment, confirming that the model is highly reliable and discriminative.
+  - **Interpretation**: This ROC-AUC score is very high, nearly 0.98, which surely signals that the model has very high discrimination capability in terms of separating classes. Further, this ensures that it is reliable and may have almost perfect separation between the classes in a multi-class environment.
 """)
 
 # Classification Report Section
@@ -291,6 +346,10 @@ st.write("""
     | 3     | 0.99     | 0.90   | 0.94     | 347     |
     
   - The overall accuracy is **0.94**, meaning the model correctly predicts 94% of the cases. The macro-average precision, recall, and F1-score average out to 0.94 across all classes, demonstrating high performance and consistency. 
+  - The model demonstrates exceptional precision across all categories, with Pituitary showing the highest precision of 0.99, followed by Glioma at 0.98, while Meningioma has a slightly lower precision at 0.89. The recall metrics are particularly strong for the Healthy category, achieving a perfect score of 1.0, with Meningioma and Pituitary following at 0.97 and 0.90 respectively. In terms of distribution, the dataset shows a balanced representation with Healthy cases comprising 30.3% of the samples, while Glioma and Meningioma each represent 22.5%, and Pituitary cases account for 24.7%. The F1-scores remain consistently high across all categories, ranging from 0.93 to 0.95, indicating a robust balance between precision and recall. The metrics trends graph reveals interesting patterns where precision and recall often trade off against each other across categories, with the model maintaining strong overall performance despite these fluctuations.
+  - The overall accuracy is 0.94, which means that the model predicts 94% of true prediction results.
+  - The macro-average metric ensures precision, recall, and F1-score average out to 0.94 across all classes. In other words, the performances are considered to be pretty high in terms of the class-to-class consistency.
+
   
   - **Weighted Average**: Precision, recall, and F1-score of 0.94 confirm that the model handles class distribution effectively.
 """)
@@ -298,22 +357,23 @@ st.write("""
 # Cross-Validation Metrics Section
 st.write("""
 5. **Cross-Validation Metrics**
-  - **Accuracy**: 0.9681
-  - **F1 Score**: 0.9681
-  - **ROC AUC Score**: 0.9892
+[0.9391, 0.97960, 0.9792, 0.9194, 0.94964]
+  - **Cross-Validation Accuracy**: 0.9681
+  - **Cross-Validation F1 Score**: 0.9680
+  - **Cross-Validation ROC AUC Score**: 0.9891
 
-  - **Interpretation**: The cross-validation scores are consistently high, reflecting strong generalization capabilities across multiple data subsets. The cross-validation accuracy, F1 score, and AUC-ROC are close to the single-run metrics, indicating that the model performs consistently on various samples from the data and does not overfit.
+  - **Interpretation**: Cross-validation scores are uniformly high, reflecting strong generalization capabilities across multiple data subsets. The accuracy is also quite similar to the single-run accuracy, as is the F1 score and AUC-ROC, pointing out that the performance of the model is good for various samples from the data and thus is not overfitting.
 """)
 
 # Summary Section
 st.write("""
 - **Summary of Results**
-  - The weighted F1 score of 0.94 shows that the model maintains high precision and recall across all classes, handling class imbalances well.
-  - The AUC-ROC score of 0.99 demonstrates strong class separability and high discrimination between categories.
-  - The classification report shows high precision, recall, and F1 scores for each class, with an overall accuracy of 94%.
-  - Cross-validation metrics, including an accuracy of 0.9681 and an AUC-ROC of 0.9892, confirm the model's robustness and reliable generalization across unseen data.
-  
-In conclusion, the model yields strong performance on both precision and recall across classes, making it a highly effective classifier for brain tumor classification.
+    - Given that the model performed quite well on several metrics,for example the weighted F1 score came to a high value of 0.94, depicting consistency in precision and recall across classes. 
+    - The AUC-ROC of 0.99 depicted very good discrimination whereby classes were separable to near perfection. It follows that the classification report-precision, recall, and F1 score for each class-is very highly percentage-wise. For the overall result, it worked out to 94% accuracy. 
+    - Weighted averages show the model is dealing well with class distribution. Strong generalization is reflected in the scores resulting from cross-validation, such as an accuracy of 0.9681 and an ROC AUC of 0.9892, close to single-run metrics. 
+    - The model's ability to perform consistently across all these different subsets of data is indicative of its robustness and reliability, the absence of overfitting. 
+    - The model performs consistently across cross-validation folds, hence confirming its robustness and good generalization on unseen data. 
+    In conclusion, this model yields a very strong performance for both precision and recall across all classes, which could make it a very strong classifier for the task at hand.
 """)
 
 
