@@ -401,20 +401,93 @@ st.write("""
 """)
 
 
-# Goals/Expected results section
-
-st.header('6. Goals/Expected Results')
+st.markdown("### ResNet50")
 st.write("""
-- F1 Score: 97-99%.
-- AUC-ROC: Above 0.95.
-- Confusion Matrix: High positive rates for various tumor types.
-- Cross-validation: Less than 1-2% standard deviation in accuracy across folds.
+The ResNet50 model demonstrated solid performance on the brain tumor classification task with respect to ROC-AUC score (97.83%), good precision, and solid recall. Some weaknesses include the model's test accuracy F1 score with signs of overfitting. ResNet50, with 23 million parameters, is designed for large datasets like ImageNet (14M+ images) and the current dataset has 7000+ images. If the dataset is small or moderately sized, the model might "memorize" the training data instead of learning general patterns. Complex tasks like brain tumor classification involve subtle and diverse patterns (e.g., Glioma vs. Meningioma), requiring more samples for the model to learn generalizable features. The model especially struggled with recalling “Glioma” cases which had complex structures.
 """)
+
+# F1 Score Section
+st.write("""
+1. **F1 Score Weighted Average: 0.80**
+   - The F1 score percentage for class “Healthy” is 85%, for “Meningioma” it is 80%, and for “Pituitary” it is 88%. However, for Glioma, it is 66%. 
+   - The model had high precision (1.00) but low recall (0.50), leading to a moderate F1 score for Glioma. 
+   - This imbalance indicates that the model predicts Glioma correctly when it does, but misses many true Glioma cases. This performance led to the overall weighted average F1 score of 0.80.
+""")
+
+# Confusion Matrix Section
+st.image('./resnet_cf.png', caption="Confusion Matrix for ResNet50 Model")
+
+st.write("""2. **Confusion Matrix**
+   A. **Glioma**:
+   - True Positives (Correct Predictions): 161
+   - Misclassifications: Predicted as Healthy (69), Meningioma (54), Pituitary (40)
+   - Insights: Significant misclassifications, especially being predicted as Healthy and Meningioma, indicate the model struggles to identify Glioma cases correctly, aligning with the low recall (50%) reported earlier.
+
+   B. **Healthy**:
+   - True Positives: 395
+   - Misclassifications: Predicted as Meningioma (5)
+   - Insights: The model performs exceptionally well for the Healthy class, with very few misclassifications, aligning with its near-perfect recall (99%).
+
+   C. **Meningioma**:
+   - True Positives: 263
+   - Misclassifications: Predicted as Healthy (46), Pituitary (20)
+   - Insights: Fair identification of Meningioma but some misclassifications as Healthy suggest feature overlap between these classes.
+
+   D. **Pituitary**:
+   - True Positives: 323
+   - Misclassifications: Predicted as Healthy (21), Meningioma (8)
+   - Insights: Strong predictions with relatively few misclassifications, aligning with the high precision (84%) and recall (92%) for this class.
+""")
+
+# ROC-AUC Score Section
+st.write("""
+3. **ROC-AUC Score: 0.9783**
+   - The model has high discriminative ability across all four classes, as the AUC values are very close to 1. 
+   - The curve for the "Healthy" class shows perfect classification (AUC = 1.00), meaning no false positives or false negatives for this class.
+   - Other classes (Glioma, Meningioma, Pituitary) also show excellent performance, indicating the model effectively distinguishes between these brain tumor types.
+""")
+st.image('./resnet_aucroc.png', caption="AUC ROC ResNet50 Model")
+
+# Classification Report Section
+st.write("""
+4. **Classification Report**
+   - **Train Accuracy (Feature Extraction Phase)**: 0.7738
+   - **Train Accuracy (Fine Tuning Phase)**: 0.9193
+   - **Test Loss**: 0.5764907598495483
+   - **Test Accuracy**: 0.8128113746643066
+
+   - **Glioma**: Perfect precision (1.00) but low recall (0.50). Identifies all predicted Glioma cases correctly but misses 50% of actual Glioma cases, leading to an F1-score of 0.66.
+   - **Healthy**: High recall (0.99) indicates almost all Healthy cases are captured. Moderate precision (0.74) suggests some Healthy predictions are false positives.
+   - **Meningioma**: Balanced precision (0.80) and recall (0.80), leading to a good F1-score (0.80).
+   - **Pituitary**: Strong performance across metrics, with an F1-score of 0.88 due to high precision (0.84) and recall (0.92).
+
+   **Strengths**: High precision and recall for most classes (e.g., Pituitary, Healthy).  
+   **Weaknesses**: Low recall for Glioma, indicating struggles to identify all Glioma cases.
+""")
+st.image('./resnet_cr1.png', caption="Classification Report 1")
+st.image('./resnet_cr2.png', caption="Classification Report 2")
+st.image('./resnet_cr3.png', caption="Classification Report 3")
+
+# Cross-Validation Metrics Section
+st.write("""
+5. **Cross-Validation Scores**
+   - **Cross-Validation F1 Scores**: [0.9125, 0.9512, 0.9586, 0.9679, 0.9905]
+   - **Mean Cross-Validation F1 Score**: 0.9675
+   - **Cross-Validation ROC-AUC Scores**: [0.9882, 0.9955, 0.9972, 0.9982, 0.9998]
+   - **Mean Cross-Validation ROC-AUC Score**: 0.99724
+
+   - The high cross-validation scores confirm the model’s strong generalization and discriminative ability.
+""")
+
+
+
+
+
 
 
 # Results comparison section
 # Results Observed Across Models Section
-st.header("Results Observed Across Models")
+st.header("6. Results Observed Across Models")
 
 # Observed Metrics
 st.subheader("Observed Metrics")
@@ -425,9 +498,12 @@ st.write("""
 - **Cross-Validation**: Less than 1-2% standard deviation in accuracy across folds.
 """)
 
+st.image('./score_comparison.png', caption="Score comparison")
+
 # Comparative Analysis
 st.subheader("Comparative Analysis")
 st.write("""
+Based on the performance metrics provided for the brain tumor image classification task, we compare to approach and analyze their strengths, limitations, and tradeoffs:
 ### K-Means
 - **Strengths**: Simplicity and computational efficiency.
 - **Limitations**:
@@ -462,17 +538,17 @@ st.write("""
   - Computationally intensive and requires significant training data.
   - Less interpretable than traditional models.
 - **Trade-offs**: Similar to ResNet50, CNN prioritizes performance over simplicity and interpretability, offering slightly better generalization.
+
+### Comparative Analysis for Brain Tumor Classificatio
+- **Performance**: ResNet50 and CNN significantly outperform K-Means and GMM. Deep learning models become much better in this respect because they can learn complex features from image data. Generalization: Both ResNet50 and CNN have high cross-validation scores and a very consistent performance. K-Means and GMM both depict poor generalization with their low and inconsistent cross-validation scores.
+- **Model complexity vs. performance**: The simple models, such as K-Means and GMM, perform very poorly, while the deep learning models perform well. However this comes at a cost of high computational power.
+- **Feature Learning**: ResNet50 and CNN are more effective because of their ability to extract relevant features automatically from brain tumor images. K-Means and GMM, when applied directly to raw pixel values or simple features of the images, do not capture the complex patterns required for their classifications.
+- **Medical Imaging Suitability**: High AUC-ROC values of ResNet50 and CNN, 0.99 and 0.958, respectively, prove that both architectures are capable of distinguishing well between tumor classes-a major aspect in medical diagnosis. Low AUC-ROC values make K-Means and GMM unsuitable for this critical task.
+- **Computational Requirements**: This superior performance is very likely to be due to higher computational costs for ResNet50 and CNN compared to K-Means and GMM.
+
+In conclusion, for this brain tumor classification task, the deep learning approaches (ResNet50 and CNN) have performed better. Despite higher computational needs and reduced interpretability, they are ideally suited for medical imaging tasks such as this, because of their ability to learn complex features from image data. Traditional clustering methods (K-Means and GMM) are not fitted for such a complicated image classification task, according to the relatively less performance recorded in all the metrics.
+
 """)
-
-# Conclusion
-st.subheader("Conclusion")
-st.write("""
-For this brain tumor classification task:
-- **Deep Learning Models (ResNet50 and CNN)**: Superior performance with high accuracy and AUC-ROC values, making them ideal for medical imaging tasks despite computational demands.
-- **Traditional Clustering Methods (K-Means and GMM)**: Poor performance, unsuitable for complex image classification tasks due to their inability to capture intricate patterns in the data.
-""")
-
-
 
 
 
@@ -482,43 +558,54 @@ For this brain tumor classification task:
 
 # Gantt Chart Section
 
-st.header('8. Gantt Chart')
+st.header('7. Gantt Chart')
 st.image('./gantt.png')
 
 # Contribution Table Section
 
-st.header('9. Contribution Table')
+st.header('8. Contribution Table')
 import streamlit as st
 
 
 st.subheader("Team Contributions")
 
 st.write("""
-| **Team Member**     | **Midterm Project Contributions**                                                                                                           |
+| **Team Member**     | **Final Project Contributions**                                                                                                             |
 |---------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **Koushika**        | ResNet50 supervised learning algorithm - implementation until PCA dimensionality reduction done, model fitting in-progress.                |
-|                     | EDA done for ResNet50.                                                                                                                      |
-|                     | Updated Github repository.                                                                                                                  |
-|                     | Updated Midterm Project Report.                                                                                                             |
-| **Jenny**           | KMeans unsupervised learning algorithm.                                                                                                     |
-|                     | Created the image visualization of the KMeans graph/plot.                                                                                   |
-|                     | Worked on computing/comparing the accuracy score, F1 score, AUC-ROC, Confusion Matrix, and cross-validation.                                |
-|                     | Updated midterm project document.                                                                                                           |
-| **Hima Varshini**   | VG16, CNN supervised algorithms implementation.                                                                                             |
-|                     | Worked on computing/comparing the accuracy score, F1 score, AUC-ROC, Confusion Matrix, and cross-validation for unsupervised and supervised learning algorithms. |
-|                     | Updated GitHub repository.                                                                                                                  |
-|                     | Updated midterm project report.                                                                                                             |
-| **Shital**          | Created Streamlit app for the midterm project report.                                                                                       |
-|                     | Created github-repo for project midterm report.                                                                                             |
-|                     | Gantt chart update.                                                                                                                         |
-|                     | Updated main project GitHub repository.                                                                                                     |
-|                     | Updated midterm project report.                                                                                                             |
+| **Koushika**        | Contributed to brainstorming sessions, project ideas, project, and proposal.                                                               |
+|                     | Preprocessed data collected.                                                                                                               |
+|                     | Implemented the ResNet50 supervised model.                                                                                                 |
+|                     | Worked on EDA, F1 score, precision score, recall score, confusion matrix, and cross-validation.                                            |
+|                     | Contributed to project reports and PowerPoint presentations.                                                                               |
+|                     | Wrote the script for both initial and final presentations.                                                                                 |
+|                     | Presented both initial and final video presentations.                                                                                      |
+|                     | Updated GitHub repository, code, and app throughout.                                                                                       |
+| **Jenny**           | Edited final project document.                                                                                                             |
+|                     | Wrote the script for the video.                                                                                                            |
+|                     | Recorded half of the video presentation.                                                                                                   |
+| **Hima Varshini**   | Contributed to the project proposal with brainstorming, references, and hosting setup on GitHub.                                           |
+|                     | Worked on preprocessing of data collected.                                                                                                |
+|                     | Implemented the CNN supervised model, tried implementing the VG16 model.                                                                  |
+|                     | Worked on visualization of results obtained through the CNN model.                                                                         |
+|                     | Worked on computing/comparing the accuracy score, F1 score, AUC-ROC, confusion matrix, and cross-validation.                               |
+|                     | Worked on comparative analysis/visualizations of all models and their performances.                                                        |
+|                     | Contributed to the project reports/PowerPoint presentations throughout the project.                                                        |
+|                     | Gantt-chart/contribution table updates throughout the project.                                                                             |
+|                     | Created/Updated GitHub repository, code, and app throughout.                                                                               |
+| **Shital**          | Implemented the GMM algorithm with image visualizations and performance evaluation using metrics like accuracy, F1, AUC-ROC, and cross-validation. |
+|                     | Contributed to the project reports throughout the project.                                                                                 |
+|                     | Contributed in drafting the final project report and the slides.                                                                           |
+|                     | Created and deployed the final project Streamlit app with supporting code and repository setup.                                             |
+|                     | Maintained and updated the Gantt Chart and GitHub repository throughout the project.                                                       |
+|                     | Developed and hosted Streamlit apps for the midterm and proposal stages.                                                                   |
+|                     | Contributed to the project proposal with brainstorming, references, and hosting setup.                                                     |
 """)
+
 
 
 # References Section
 
-st.header('10. References')
+st.header('9. References')
 st.write("""
 [1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/)(accessed Oct. 4, 2024).\n
 [2] M. Z. Khaliki and M. S. Başarslan, “Brain tumor detection from images and comparison with transfer learning methods and 3-layer CNN,” *Nature News*, [https://www.nature.com/articles/s41598-024-52823-9](https://www.nature.com/articles/s41598-024-52823-9)  (accessed Oct. 4, 2024).\n
