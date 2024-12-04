@@ -412,14 +412,82 @@ st.write("""
 """)
 
 
+# Results comparison section
+# Results Observed Across Models Section
+st.header("Results Observed Across Models")
+
+# Observed Metrics
+st.subheader("Observed Metrics")
+st.write("""
+- **F1 Score**: 75-99% for supervised models, up to 50% for unsupervised models.
+- **AUC-ROC**: Above 0.95 for supervised models, up to 60% observed for unsupervised models.
+- **Confusion Matrix**: High positive rates for various tumor types.
+- **Cross-Validation**: Less than 1-2% standard deviation in accuracy across folds.
+""")
+
+# Comparative Analysis
+st.subheader("Comparative Analysis")
+st.write("""
+### K-Means
+- **Strengths**: Simplicity and computational efficiency.
+- **Limitations**:
+  - Poor performance across all metrics (F1 Score: 0.4903, AUC-ROC: 0.3032, Mean CV Accuracy: 0.2870).
+  - Inability to capture complex patterns in brain tumor images.
+  - Assumes spherical clusters, which is unsuitable for this task.
+- **Trade-offs**: K-Means trades off accuracy for simplicity, failing to capture intricate features needed for accurate tumor classification.
+
+### Gaussian Mixture Models (GMM)
+- **Strengths**: Slightly better performance than K-Means, with more flexible cluster modeling.
+- **Limitations**:
+  - Underperforms significantly (F1 Score: 0.4130, AUC-ROC: 0.6286, Mean CV Accuracy: 0.3620).
+  - Cannot capture complex, non-linear patterns in tumor images.
+- **Trade-offs**: GMM offers flexibility at increased complexity but without competitive performance.
+
+### ResNet50
+- **Strengths**:
+  - Excellent performance across all metrics (F1 Score: 0.96, AUC-ROC: 0.99, Mean CV Accuracy: 0.96).
+  - Learns complex, hierarchical features from tumor images.
+  - High cross-validation accuracy, indicating robust generalization.
+- **Limitations**:
+  - Computationally intensive and requires significant training data.
+  - Less interpretable than simpler models.
+- **Trade-offs**: ResNet50 trades simplicity for superior performance, with high computational demands and reduced transparency.
+
+### Convolutional Neural Network (CNN)
+- **Strengths**:
+  - Very high performance (F1 Score: 0.94, AUC-ROC: 0.958, Mean CV Accuracy: 0.9681).
+  - Learns relevant features directly from image data.
+  - Slightly better generalization than ResNet50.
+- **Limitations**:
+  - Computationally intensive and requires significant training data.
+  - Less interpretable than traditional models.
+- **Trade-offs**: Similar to ResNet50, CNN prioritizes performance over simplicity and interpretability, offering slightly better generalization.
+""")
+
+# Conclusion
+st.subheader("Conclusion")
+st.write("""
+For this brain tumor classification task:
+- **Deep Learning Models (ResNet50 and CNN)**: Superior performance with high accuracy and AUC-ROC values, making them ideal for medical imaging tasks despite computational demands.
+- **Traditional Clustering Methods (K-Means and GMM)**: Poor performance, unsuitable for complex image classification tasks due to their inability to capture intricate patterns in the data.
+""")
+
+
+
+
+
+
+
+
+
 # Gantt Chart Section
 
-st.header('7. Gantt Chart')
+st.header('8. Gantt Chart')
 st.image('./gantt.png')
 
 # Contribution Table Section
 
-st.header('8. Contribution Table')
+st.header('9. Contribution Table')
 import streamlit as st
 
 
@@ -450,7 +518,7 @@ st.write("""
 
 # References Section
 
-st.header('9. References')
+st.header('10. References')
 st.write("""
 [1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/)(accessed Oct. 4, 2024).\n
 [2] M. Z. Khaliki and M. S. Başarslan, “Brain tumor detection from images and comparison with transfer learning methods and 3-layer CNN,” *Nature News*, [https://www.nature.com/articles/s41598-024-52823-9](https://www.nature.com/articles/s41598-024-52823-9)  (accessed Oct. 4, 2024).\n
