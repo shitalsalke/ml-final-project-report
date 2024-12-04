@@ -244,6 +244,7 @@ st.write("""
   - **Interpretation**: The AUC-ROC (Area Under the Receiver Operating Characteristic Curve) score measures the performance of a classification model. It is typically used for binary classification, but here it is being used for a multi-class case with the "One-vs-Rest" (OvR) approach.
   - A **low AUC-ROC score of 0.3032** indicates that the clustering model struggles to distinguish between the categories. An AUC score closer to 1 means the model has better performance at differentiating between classes. Since your score is much lower, it suggests that your clustering algorithm isn't reliably separating the classes.
 """)
+st.image('./kmeans_aucroc.png', caption="AUC ROC score for KMeans")
 
 st.write("""
 **4. Cross-Validation Scores:**
@@ -302,6 +303,8 @@ st.write("""
   - **Interpretation**: The AUC-ROC (Area Under the Receiver Operating Characteristic Curve) score measures the performance of a classification model. It is typically used for binary classification, but here it is being used for a multi-class case with the "One-vs-Rest" (OvR) approach.
   - A **low AUC-ROC score of 0.3032** indicates that the clustering model struggles to distinguish between the categories. An AUC score closer to 1 means the model has better performance at differentiating between classes. Since your score is much lower, it suggests that your clustering algorithm isn't reliably separating the classes.
 """)
+
+st.image('./gmm_aucroc.png', caption="AUC ROC score for GMM")
 
 st.write("""
 **4. Cross-Validation Scores:**
@@ -377,6 +380,7 @@ st.write("""
   
   - **Weighted Average**: Precision, recall, and F1-score of 0.94 confirm that the model handles class distribution effectively.
 """)
+st.image('./cnn.png', caption="Performance metrics for CNN")
 
 # Cross-Validation Metrics Section
 st.write("""
