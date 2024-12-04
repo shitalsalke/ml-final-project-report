@@ -539,7 +539,7 @@ Based on the performance metrics provided for the brain tumor image classificati
   - Less interpretable than traditional models.
 - **Trade-offs**: Similar to ResNet50, CNN prioritizes performance over simplicity and interpretability, offering slightly better generalization.
 
-### Comparative Analysis for Brain Tumor Classificatio
+### Comparative Analysis for Brain Tumor Classification
 - **Performance**: ResNet50 and CNN significantly outperform K-Means and GMM. Deep learning models become much better in this respect because they can learn complex features from image data. Generalization: Both ResNet50 and CNN have high cross-validation scores and a very consistent performance. K-Means and GMM both depict poor generalization with their low and inconsistent cross-validation scores.
 - **Model complexity vs. performance**: The simple models, such as K-Means and GMM, perform very poorly, while the deep learning models perform well. However this comes at a cost of high computational power.
 - **Feature Learning**: ResNet50 and CNN are more effective because of their ability to extract relevant features automatically from brain tumor images. K-Means and GMM, when applied directly to raw pixel values or simple features of the images, do not capture the complex patterns required for their classifications.
@@ -580,9 +580,14 @@ st.write("""
 |                     | Wrote the script for both initial and final presentations.                                                                                 |
 |                     | Presented both initial and final video presentations.                                                                                      |
 |                     | Updated GitHub repository, code, and app throughout.                                                                                       |
-| **Jenny**           | Edited final project document.                                                                                                             |
-|                     | Wrote the script for the video.                                                                                                            |
-|                     | Recorded half of the video presentation.                                                                                                   |
+| **Jenny**           | Attended all team meetings and actively contributed ideas to advance the project.                                                          |
+|                     | Reformatted references to the required format.                                                                                            |
+|                     | Authored and refined comprehensive project documentation.                                                                                  |
+|                     | Developed and implemented the K-Means unsupervised learning algorithm.                                                                     |
+|                     | Designed and created an image visualization of the K-Means graph/plot.                                                                     |
+|                     | Calculated and analyzed key performance metrics, including accuracy score, F1 score, AUC-ROC, confusion matrix, and cross-validation.      |
+|                     | Drafted the script for the video presentation.                                                                                            |
+|                     | Recorded half of the video presentation, ensuring clear and professional delivery.                                                         |
 | **Hima Varshini**   | Contributed to the project proposal with brainstorming, references, and hosting setup on GitHub.                                           |
 |                     | Worked on preprocessing of data collected.                                                                                                |
 |                     | Implemented the CNN supervised model, tried implementing the VG16 model.                                                                  |
@@ -592,13 +597,14 @@ st.write("""
 |                     | Contributed to the project reports/PowerPoint presentations throughout the project.                                                        |
 |                     | Gantt-chart/contribution table updates throughout the project.                                                                             |
 |                     | Created/Updated GitHub repository, code, and app throughout.                                                                               |
-| **Shital**          | Implemented the GMM algorithm with image visualizations and performance evaluation using metrics like accuracy, F1, AUC-ROC, and cross-validation. |
-|                     | Contributed to the project reports throughout the project.                                                                                 |
-|                     | Contributed in drafting the final project report and the slides.                                                                           |
-|                     | Created and deployed the final project Streamlit app with supporting code and repository setup.                                             |
-|                     | Maintained and updated the Gantt Chart and GitHub repository throughout the project.                                                       |
-|                     | Developed and hosted Streamlit apps for the midterm and proposal stages.                                                                   |
-|                     | Contributed to the project proposal with brainstorming, references, and hosting setup.                                                     |
+| **Shital**          | Played a key role in brainstorming project ideas, contributing to comprehensive project documentation and proposal drafts.                  |
+|                     | Actively worked on setting up, maintaining, and updating the GitHub repository throughout the project, ensuring seamless collaboration.      |
+|                     | Implemented the GMM algorithm with detailed image visualizations and performance evaluation using metrics like accuracy, F1, AUC-ROC, and cross-validation. |
+|                     | Contributed to drafting, refining, and finalizing the project reports and slides for all stages of the project.                             |
+|                     | Designed, developed, and deployed the final project Streamlit app, including code implementation and repository integration.                |
+|                     | Maintained and updated the Gantt Chart to track progress and team contributions.                                                           |
+|                     | Created and hosted Streamlit apps for the midterm and proposal stages to showcase progress and results effectively.                         |
+|                     | Updated GitHub repository, code, and app throughout.                                                                                        |
 """)
 
 
