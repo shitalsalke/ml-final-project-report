@@ -617,11 +617,24 @@ st.write("""
 
 st.header('9. References')
 st.write("""
-[1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/)(accessed Oct. 4, 2024).\n
-[2] M. Z. Khaliki and M. S. Başarslan, “Brain tumor detection from images and comparison with transfer learning methods and 3-layer CNN,” *Nature News*, [https://www.nature.com/articles/s41598-024-52823-9](https://www.nature.com/articles/s41598-024-52823-9)  (accessed Oct. 4, 2024).\n
-[3] H. ZainEldin et al., “Brain tumor detection and classification using deep learning and sine-cosine fitness grey wolf optimization,” *Bioengineering (Basel, Switzerland)*, [https://pubmed.ncbi.nlm.nih.gov/36671591/](https://pubmed.ncbi.nlm.nih.gov/36671591/) (accessed Oct. 4, 2024).\n
-[4] S. K. Mathivanan et al., “Employing deep learning and transfer learning for accurate brain tumor detection,” *Nature News*, [https://www.nature.com/articles/s41598-024-57970-7](https://www.nature.com/articles/s41598-024-57970-7). (accessed Oct. 4, 2024)\n
-[5] S. Saeedi, S. Rezayi, H. Keshavarz, and S. R. N. Kalhori, “MRI-based brain tumor detection using convolutional deep learning methods and chosen machine learning techniques - BMC Medical Informatics and decision making,” *BioMed Central*, [https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-023-02114-6](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-023-02114-6) (accessed Oct. 4, 2024). \n
-[6] B. Babu Vimala et al., “Detection and classification of brain tumor using hybrid deep learning models,” *Scientific Reports*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10754828/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10754828/) (accessed Oct. 4, 2024).\n
-[7] J. Amin, M. Sharif, A. Haldorai, M. Yasmin, and R. S. Nayak, “Brain tumor detection and classification using Machine Learning: A comprehensive survey - complex & intelligent systems,” *SpringerLink*, [https://link.springer.com/article/10.1007/s40747-021-00563-y](https://link.springer.com/article/10.1007/s40747-021-00563-y) (accessed Oct. 4, 2024).\n
+[1] A. B. Abdusalomov, M. Mukhiddinov, and T. K. Whangbo, “Brain tumor detection based on deep learning approaches and Magnetic Resonance Imaging,” *Cancers*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10453020/) (accessed Oct. 4, 2024).
+
+[2] M. Z. Khaliki and M. S. Başarslan, “Brain tumor detection from images and comparison with transfer learning methods and 3-layer CNN,” *Nature News*, [https://www.nature.com/articles/s41598-024-52823-9](https://www.nature.com/articles/s41598-024-52823-9) (accessed Oct. 4, 2024).
+
+[3] H. ZainEldin et al., “Brain tumor detection and classification using deep learning and sine-cosine fitness grey wolf optimization,” *Bioengineering (Basel, Switzerland)*, [https://pubmed.ncbi.nlm.nih.gov/36671591/](https://pubmed.ncbi.nlm.nih.gov/36671591/) (accessed Oct. 4, 2024).
+
+[4] S. K. Mathivanan et al., “Employing deep learning and transfer learning for accurate brain tumor detection,” *Nature News*, [https://www.nature.com/articles/s41598-024-57970-7](https://www.nature.com/articles/s41598-024-57970-7) (accessed Oct. 4, 2024).
+
+[5] S. Saeedi, S. Rezayi, H. Keshavarz, and S. R. N. Kalhori, “MRI-based brain tumor detection using convolutional deep learning methods and chosen machine learning techniques,” *BMC Medical Informatics and Decision Making*, [https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-023-02114-6](https://bmcmedinformdecismak.biomedcentral.com/articles/10.1186/s12911-023-02114-6) (accessed Oct. 4, 2024).
+
+[6] B. Babu Vimala et al., “Detection and classification of brain tumor using hybrid deep learning models,” *Scientific Reports*, [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10754828/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10754828/) (accessed Oct. 4, 2024).
+
+[7] J. Amin, M. Sharif, A. Haldorai, M. Yasmin, and R. S. Nayak, “Brain tumor detection and classification using Machine Learning: A comprehensive survey - complex & intelligent systems,” *SpringerLink*, [https://link.springer.com/article/10.1007/s40747-021-00563-y](https://link.springer.com/article/10.1007/s40747-021-00563-y) (accessed Oct. 4, 2024).
+
+[8] A. A. Dehkordi, M. Hashemi, M. Neshat, S. Mirjalili, and A. S. Sadiq, “Brain tumor detection and classification using a new evolutionary convolutional neural network,” *arXiv preprint arXiv:2204.1229*, [https://arxiv.org/abs/2204.12297](https://arxiv.org/abs/2204.12297) (accessed Nov. 11, 2024).
+
+[9] F.J. Díaz-Pernas, M. Martínez-Zarzuela, M. Antón-Rodríguez, and D. González-Ortega, “A deep learning approach for brain tumor classification and segmentation using a multiscale convolutional neural network,” *Healthcare (Vol. 9, No. 2, p. 153)*, *MDPI*, [https://arxiv.org/abs/2402.05975](https://arxiv.org/abs/2402.05975) (accessed Nov. 11, 2024).
+
+[10] M.A. Khan and A.K. Verma, “Comparative Analysis of Resource-Efficient CNN Architectures for Brain Tumor Classification,” *arXiv preprint arXiv:2411.15596*, [https://www.arxiv.org/abs/2411.15596](https://www.arxiv.org/abs/2411.15596) (accessed Nov. 11, 2024).
 """)
+
